@@ -81,6 +81,7 @@ namespace bruteforce
         return { minDist, bestPath };
     }   // findShortestPath
 
+
     std::pair<std::vector<int>, std::vector<std::vector<int>>> findShortestPaths(
         const std::vector<std::vector<Edge>>& graph,
         const std::vector<int>& sources,
