@@ -1,5 +1,6 @@
 #include "bruteforce.h"
 #include "dijkstra_naive.h"
+#include "dijkstra_with_binary_heap.h"
 
 #include <iostream>
 #include <fstream>
@@ -60,6 +61,7 @@ std::vector<std::vector<Edge>> loadInput(const std::string& fileName, bool direc
     return graph;
 }   // loadInput
 
+
 std::vector<int> loadOutput(const std::string& fileName)
 {
     std::ifstream f{ fileName, std::ios::in };
@@ -83,6 +85,7 @@ std::vector<int> loadOutput(const std::string& fileName)
 
     return dists;
 }   // loadOutput
+
 
 bool runTests(const std::vector<std::string>& inputFiles, const std::vector<std::string>& outputFiles,
               bool directed, int source, const std::vector<int>& targets,
@@ -137,36 +140,16 @@ bool runTests(const std::vector<std::string>& inputFiles, const std::vector<std:
     }   // for test
 
     if (allPassed)
-    {
         std::cout << std::endl << "All tests passed." << std::endl;
-    }
     else
-    {
         std::cout << std::endl << "Some tests failed." << std::endl;
-    }
 
     return allPassed;
 }   // runTests
 
+
 int main()
 {
-    //int source = 1;
-    ////std::vector<int> targets{ 7, 37, 59, 82, 99, 115, 133, 165, 188, 197 };
-    //std::vector<int> targets{ 1, 2, 3, 4, 5 };
-
-    //std::string inputFiles[] =
-    //{
-    //    "bruteforce_input_1_5.txt"
-    //    //"input_random_1_4.txt"
-    //};
-
-    //std::string outputFiles[] =
-    //{
-    //    "bruteforce_output_1_5.txt"
-    //    //"output_random_1_4.txt"
-    //};
-
-
     std::cout << "Brute-force search" << std::endl;
 
     runTests(
@@ -175,7 +158,8 @@ int main()
         true,   // directed
         1,
         { 1, 2, 3, 4, 5 },
-        bruteforce::findShortestPaths);
+        bruteforce::findShortestPaths
+    );
     
 
     std::cout << std::endl << "Naive Dijkstra search" << std::endl;
@@ -244,6 +228,78 @@ int main()
         false,  // undirected
         1,
         { 7, 37, 59, 82, 99, 115, 133, 165, 188, 197 },
-        dijkstra_naive::findShortestPaths);
+        dijkstra_naive::findShortestPaths
+    );
 
+
+    std::cout << std::endl << "Dijkstra search with binary heap" << std::endl;
+
+    runTests(
+        {
+            "input_random_1_4.txt",
+            "input_random_2_4.txt",
+            "input_random_3_4.txt",
+            "input_random_4_4.txt",
+            "input_random_5_8.txt",
+            "input_random_6_8.txt",
+            "input_random_7_8.txt",
+            "input_random_8_8.txt",
+            "input_random_9_16.txt",
+            "input_random_10_16.txt",
+            "input_random_11_16.txt",
+            "input_random_12_16.txt",
+            "input_random_13_32.txt",
+            "input_random_14_32.txt",
+            "input_random_15_32.txt",
+            "input_random_16_32.txt",
+            "input_random_17_64.txt",
+            "input_random_18_64.txt",
+            "input_random_19_64.txt",
+            "input_random_20_64.txt",
+            "input_random_21_128.txt",
+            "input_random_22_128.txt",
+            "input_random_23_128.txt",
+            "input_random_24_128.txt",
+            "input_random_25_256.txt",
+            "input_random_26_256.txt",
+            "input_random_27_256.txt",
+            "input_random_28_256.txt"
+        },
+        {
+            "output_random_1_4.txt",
+            "output_random_2_4.txt",
+            "output_random_3_4.txt",
+            "output_random_4_4.txt",
+            "output_random_5_8.txt",
+            "output_random_6_8.txt",
+            "output_random_7_8.txt",
+            "output_random_8_8.txt",
+            "output_random_9_16.txt",
+            "output_random_10_16.txt",
+            "output_random_11_16.txt",
+            "output_random_12_16.txt",
+            "output_random_13_32.txt",
+            "output_random_14_32.txt",
+            "output_random_15_32.txt",
+            "output_random_16_32.txt",
+            "output_random_17_64.txt",
+            "output_random_18_64.txt",
+            "output_random_19_64.txt",
+            "output_random_20_64.txt",
+            "output_random_21_128.txt",
+            "output_random_22_128.txt",
+            "output_random_23_128.txt",
+            "output_random_24_128.txt",
+            "output_random_25_256.txt",
+            "output_random_26_256.txt",
+            "output_random_27_256.txt",
+            "output_random_28_256.txt"
+        },
+        false,  // undirected
+        1,
+        { 7, 37, 59, 82, 99, 115, 133, 165, 188, 197 },
+        dijkstra_with_binary_heap::findShortestPaths
+    );
+
+    return 0;
 }
