@@ -7,7 +7,17 @@ project(sssp)
 
 #find_package(Catch2 CONFIG REQUIRED)
 
-add_executable(sssp main.cpp edge.h bruteforce.h dijkstra_naive.h bruteforce.cpp dijkstra_naive.cpp)
+add_executable(
+	sssp 
+	main.cpp 
+	edge.h 
+	bruteforce.h 
+	dijkstra_naive.h 
+	dijkstra_with_binary_heap.h 
+	bruteforce.cpp 
+	dijkstra_naive.cpp 
+	dijkstra_with_binary_heap.cpp
+)
 
 #target_compile_definitions(playground PRIVATE CONFIGURATOR_WINDOW)
 
