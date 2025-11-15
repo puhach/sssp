@@ -7,11 +7,7 @@ project(sssp)
 
 #find_package(Catch2 CONFIG REQUIRED)
 
-add_executable(bruteforce bruteforce.cpp)
-
-add_executable(dijkstra_naive dijkstra_naive.cpp)
-
-add_executable(dijkstra_with_binary_heap dijkstra_with_binary_heap.cpp)
+add_executable(sssp main.cpp edge.h bruteforce.h dijkstra_naive.h bruteforce.cpp dijkstra_naive.cpp)
 
 #target_compile_definitions(playground PRIVATE CONFIGURATOR_WINDOW)
 
@@ -20,7 +16,5 @@ add_executable(dijkstra_with_binary_heap dijkstra_with_binary_heap.cpp)
 
 
 if(MSVC)
-	set_property(TARGET bruteforce PROPERTY VS_DEBUGGER_WORKING_DIRECTORY "${PROJECT_SOURCE_DIR}")
-	set_property(TARGET dijkstra_naive PROPERTY VS_DEBUGGER_WORKING_DIRECTORY "${PROJECT_SOURCE_DIR}")
-	set_property(TARGET dijkstra_with_binary_heap PROPERTY VS_DEBUGGER_WORKING_DIRECTORY "${PROJECT_SOURCE_DIR}")
+	set_property(TARGET sssp PROPERTY VS_DEBUGGER_WORKING_DIRECTORY "${PROJECT_SOURCE_DIR}")
 endif()
