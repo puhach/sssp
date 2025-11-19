@@ -36,14 +36,24 @@ add_executable(
 	bruteforce.h 
 	dijkstra_naive.h 
 	dijkstra_with_binary_heap.h 
+	graph_io.h
 	bruteforce.cpp 
 	dijkstra_naive.cpp 
 	dijkstra_with_binary_heap.cpp
+	graph_io.cpp
 )
 
 add_executable(
 	sssp_benchmarks	
 	benchmarks.cpp
+	graph_gen.h
+	graph_gen.cpp
+	dijkstra_naive.h
+	dijkstra_naive.cpp
+	dijkstra_with_binary_heap.h
+	dijkstra_with_binary_heap.cpp
+	bruteforce.h
+	bruteforce.cpp
 )
 
 
