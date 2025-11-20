@@ -65,11 +65,12 @@ target_link_libraries(
 )
 
 
-
-#target_compile_definitions(playground PRIVATE CONFIGURATOR_WINDOW)
-
-#target_include_directories(playground PRIVATE ${Boost_INCLUDE_DIRS})
-#target_link_libraries(playground PRIVATE  ${OpenCV_LIBS}  ${Boost_LIBRARIES})
+add_custom_command(
+    TARGET sssp POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+            "${CMAKE_SOURCE_DIR}/tests"
+            "$<TARGET_FILE_DIR:sssp>/tests"
+)
 
 
 if(MSVC)
