@@ -11,7 +11,8 @@
 static void findShortestPath(
     std::function<std::pair<std::vector<int>, std::vector<std::vector<int>>>
                 (const std::vector<std::vector<Edge>>&,
-                 const std::vector<int>& sources,
+                 //const std::vector<int>& sources,
+                 int source,
                  const std::vector<int>& targets)> alg,
     bool directed,
     double edgeProbability,
@@ -21,14 +22,15 @@ static void findShortestPath(
 
     auto graph = generateGraph(numNodes, directed, edgeProbability, 1, 100);
 
-    auto sources = std::vector<int>{ 0 };
+    //auto sources = std::vector<int>{ 0 };
+    auto source = 0;
 
     auto targets = std::vector<int>(numNodes);
     std::iota(targets.begin(), targets.end(), 0);
 
     for (auto _ : state)
     {
-        benchmark::DoNotOptimize(alg(graph, sources, targets));
+        benchmark::DoNotOptimize(alg(graph, source, targets));
     }
 
     state.SetComplexityN(numNodes);

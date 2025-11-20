@@ -11,10 +11,6 @@
 #include <limits>
 #include <cassert>
 
-//using namespace std;
-
-
-
 
 namespace bruteforce
 {
@@ -42,15 +38,7 @@ namespace bruteforce
                 if (visited[mid])
                     continue;
 
-                //visited[mid] = true;
                 dfs(graph, mid, end, curDist + edge.weight, minDist, curPath, bestPath, visited);
-                //visited[mid] = false;
-
-                //if (subpathCost >= 0 && (minCost < 0 || curCost < minCost))
-                //{
-                //    prev[mid] = start;
-                //    minCost = subpathCost + edge.weight;
-                //}   // better path found
             }   // for edge
         }   // start == end
 
@@ -66,15 +54,9 @@ namespace bruteforce
         assert(start >= 0 && start < n);
         assert(end >= 0 && end < n);
 
-        //if (start == end)
-        //    return {  };
-
-        //std::queue<int> frontier;
-        //std::vector<int> prev(n, -1);
         std::vector<int> curPath, bestPath;
         std::vector<bool> visited(n, false);
         int minDist = infDist;
-        //int minDist = std::numeric_limits<int>::max();
 
         dfs(graph, start, end, 0, minDist, curPath, bestPath, visited);
 
@@ -84,7 +66,8 @@ namespace bruteforce
 
     std::pair<std::vector<int>, std::vector<std::vector<int>>> findShortestPaths(
         const std::vector<std::vector<Edge>>& graph,
-        const std::vector<int>& sources,
+        //const std::vector<int>& sources,
+        int source,
         const std::vector<int>& targets)
     {
         int n = static_cast<int>(graph.size());
@@ -92,33 +75,29 @@ namespace bruteforce
         std::vector<int> minDists;
         std::vector<std::vector<int>> shortestPaths;
         
-        minDists.reserve(sources.size() * targets.size());
-        shortestPaths.reserve(sources.size() * targets.size());
+        minDists.reserve(targets.size());
+        shortestPaths.reserve(targets.size());
+        //minDists.reserve(sources.size() * targets.size());
+        //shortestPaths.reserve(sources.size() * targets.size());
         
-        for (int source : sources)
-        {
+        //for (int source : sources)
+        //{
             assert(source >= 0 && source < n);
 
             for (int target : targets)
             {
                 assert(target >= 0 && target < n);
 
-                //if (start == end)
-                //    return {  };
-
-                //std::queue<int> frontier;
-                //std::vector<int> prev(n, -1);
                 std::vector<int> curPath, bestPath;
                 std::vector<bool> visited(n, false);
                 int minDist = infDist;
-                //int minDist = std::numeric_limits<int>::max();
 
                 dfs(graph, source, target, 0, minDist, curPath, bestPath, visited);
 
                 minDists.push_back(minDist);
                 shortestPaths.push_back(std::move(bestPath));
             }   // for target
-        } // for source
+        //} // for source
 
         return std::make_pair(std::move(minDists), std::move(shortestPaths));
     }   // findShortestPaths

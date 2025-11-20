@@ -14,7 +14,8 @@ bool runTests(const std::vector<std::string>& inputFiles, const std::vector<std:
               bool directed, int source, const std::vector<int>& targets,
               std::function<std::pair<std::vector<int>, std::vector<std::vector<int>>>
                             (const std::vector<std::vector<Edge>>& graph, 
-                             const std::vector<int>& sources, 
+                             //const std::vector<int>& sources, 
+                             int source,
                              const std::vector<int>& targets)> findShortestPaths)
 {
     assert(inputFiles.size() == outputFiles.size());
@@ -36,7 +37,7 @@ bool runTests(const std::vector<std::string>& inputFiles, const std::vector<std:
         std::transform(targets.cbegin(), targets.cend(), zbTargets.begin(),
                        [](auto target) { return target - 1; });
 
-        auto [minDistsComputed, zbShortestPaths] = findShortestPaths(graph, { source - 1 }, zbTargets);
+        auto [minDistsComputed, zbShortestPaths] = findShortestPaths(graph, source - 1, zbTargets);
 
         for (int i = 0; i < targets.size(); ++i)
         {
@@ -44,9 +45,6 @@ bool runTests(const std::vector<std::string>& inputFiles, const std::vector<std:
             auto zbTarget = zbTargets[i];
             auto minDistComputed = minDistsComputed[zbTarget];
             auto minDistGroundTruth = minDistsGroundTruth[i];
-
-            //int minDist;
-            //std::tie(minDist, std::ignore) = bruteforce::findShortestPath(graph, source - 1, target - 1);
 
             std::cout << "target " << target << ": ";
 

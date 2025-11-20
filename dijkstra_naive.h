@@ -10,7 +10,8 @@ namespace dijkstra_naive
 {
     std::pair<std::vector<int>, std::vector<std::vector<int>>> findShortestPaths(
         const std::vector<std::vector<Edge>>& graph,
-        const std::vector<int>& sources, 
+        //const std::vector<int>& sources, 
+        int source,
         const std::vector<int>& targets);
 
 }   // dijkstra_naive
